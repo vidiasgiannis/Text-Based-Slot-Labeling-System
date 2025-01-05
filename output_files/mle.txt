@@ -1,0 +1,2574 @@
+> Reading training data from data/training_data.json...
+> Reading validation data from data/validation_data.json...
+> Tokenising and annotating raw data with spacy...
+> Training most_frequent_tag model on training data...
+> Trained most frequent tag model on 7348 tokens
+> Predicting tags on validation data...
+> Evaluating results on validation data...
+Input: I would like to check in the 4 April and check out the Wednesday, thanks
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   would           O               O                 ✔       would          MD      aux     
+2   like            O               O                 ✔       like           VB      ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   check           O               O                 ✔       check          VB      xcomp   
+5   in              O               O                 ✔       in             IN      prep    
+6   the             O               O                 ✔       the            DT      det     
+7   4               B-date_from     B-people             ✗    4              CD      nummod  
+8   April           I-date_from     I-date               ✗    April          NNP     pobj    
+9   and             O               O                 ✔       and            CC      cc      
+10  check           O               O                 ✔       check          VB      conj    
+11  out             O               O                 ✔       out            RP      prt     
+12  the             O               O                 ✔       the            DT      det     
+13  Wednesday       B-date_to       B-date_to         ✔       Wednesday      NNP     dobj    
+14  ,               O               O                 ✔       ,              ,       punct   
+15  thanks          O               O                 ✔       thank          NNS     npadvmod
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (7, 9): date_from      
+✔ (13, 14): date_to        
+
+predicted spans (incorrectly extracted from BIO tags):
+  (7, 9): people
+✔ (13, 14): date_to
+
+=============================================================================================
+
+Input: I am still waiting for the refund of the room i cancelled
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   am              O               O                 ✔       be             VBP     aux     
+2   still           O               O                 ✔       still          RB      advmod  
+3   waiting         O               O                 ✔       wait           VBG     ROOT    
+4   for             O               O                 ✔       for            IN      prep    
+5   the             O               O                 ✔       the            DT      det     
+6   refund          O               O                 ✔       refund         NN      pobj    
+7   of              O               O                 ✔       of             IN      prep    
+8   the             B-rooms         O                    ✗    the            DT      det     
+9   room            I-rooms         O                    ✗    room           NN      pobj    
+10  i               O               O                 ✔       I              PRP     nsubj   
+11  cancelled       O               O                 ✔       cancel         VBD     relcl   
+
+annotated spans:
+  (8, 10): rooms          
+
+predicted spans:
+
+=============================================================================================
+
+Input: what time do the cleaning personel come?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   what            O               O                 ✔       what           WDT     det     
+1   time            O               O                 ✔       time           NN      dobj    
+2   do              O               O                 ✔       do             VBP     aux     
+3   the             O               O                 ✔       the            DT      det     
+4   cleaning        O               O                 ✔       cleaning       NN      compound
+5   personel        O               O                 ✔       personel       NN      nsubj   
+6   come            O               O                 ✔       come           VB      ROOT    
+7   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: how much does a full body massage last?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   how             O               O                 ✔       how            WRB     advmod  
+1   much            O               O                 ✔       much           JJ      advmod  
+2   does            O               O                 ✔       do             VBZ     aux     
+3   a               O               O                 ✔       a              DT      det     
+4   full            O               I-date_period        ✗    full           JJ      amod    
+5   body            O               O                 ✔       body           NN      compound
+6   massage         O               O                 ✔       massage        NN      nsubj   
+7   last            O               B-date_period        ✗    last           JJ      ROOT    
+8   ?               O               O                 ✔       ?              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+
+predicted spans (incorrectly extracted from BIO tags):
+  (7, 8): date_period
+
+=============================================================================================
+
+Input: ok, then I need a wheelchair friendly room
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   ok              O               O                 ✔       ok             UH      intj    
+1   ,               O               O                 ✔       ,              ,       punct   
+2   then            O               O                 ✔       then           RB      advmod  
+3   I               O               O                 ✔       I              PRP     nsubj   
+4   need            O               O                 ✔       need           VBP     ROOT    
+5   a               B-rooms         O                    ✗    a              DT      det     
+6   wheelchair      I-rooms         O                    ✗    wheelchair     NN      npadvmod
+7   friendly        I-rooms         O                    ✗    friendly       JJ      amod    
+8   room            I-rooms         O                    ✗    room           NN      dobj    
+
+annotated spans:
+  (5, 9): rooms          
+
+predicted spans:
+
+=============================================================================================
+
+Input: i lost it, but don't know where
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   i               O               O                 ✔       I              PRP     nsubj   
+1   lost            O               O                 ✔       lose           VBD     ROOT    
+2   it              O               O                 ✔       it             PRP     dobj    
+3   ,               O               O                 ✔       ,              ,       punct   
+4   but             O               O                 ✔       but            CC      cc      
+5   do              O               O                 ✔       do             VBP     aux     
+6   n't             O               O                 ✔       not            RB      neg     
+7   know            O               O                 ✔       know           VB      conj    
+8   where           O               O                 ✔       where          WRB     ccomp   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: i lost it, but no idea where
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   i               O               O                 ✔       I              PRP     nsubj   
+1   lost            O               O                 ✔       lose           VBD     ROOT    
+2   it              O               O                 ✔       it             PRP     dobj    
+3   ,               O               O                 ✔       ,              ,       punct   
+4   but             O               O                 ✔       but            CC      cc      
+5   no              O               O                 ✔       no             DT      det     
+6   idea            O               O                 ✔       idea           NN      conj    
+7   where           O               O                 ✔       where          WRB     advmod  
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Goodbye, my virtual friend!
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Goodbye         O               O                 ✔       Goodbye        NNP     ROOT    
+1   ,               O               O                 ✔       ,              ,       punct   
+2   my              O               O                 ✔       my             PRP$    poss    
+3   virtual         O               O                 ✔       virtual        JJ      amod    
+4   friend          O               O                 ✔       friend         NN      appos   
+5   !               O               O                 ✔       !              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: hiya there, I need some info about my current booking at your place
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   hiya            O               O                 ✔       hiya           NNP     advmod  
+1   there           O               O                 ✔       there          RB      advmod  
+2   ,               O               O                 ✔       ,              ,       punct   
+3   I               O               O                 ✔       I              PRP     nsubj   
+4   need            O               O                 ✔       need           VBP     ROOT    
+5   some            O               O                 ✔       some           DT      det     
+6   info            O               O                 ✔       info           NN      dobj    
+7   about           O               O                 ✔       about          IN      prep    
+8   my              O               O                 ✔       my             PRP$    poss    
+9   current         O               O                 ✔       current        JJ      amod    
+10  booking         O               O                 ✔       booking        NN      pobj    
+11  at              O               O                 ✔       at             IN      prep    
+12  your            O               O                 ✔       your           PRP$    poss    
+13  place           O               O                 ✔       place          NN      pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I need to speak to someone working at the pool.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   need            O               O                 ✔       need           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   speak           O               O                 ✔       speak          VB      xcomp   
+4   to              O               O                 ✔       to             IN      prep    
+5   someone         O               O                 ✔       someone        NN      pobj    
+6   working         O               O                 ✔       work           VBG     acl     
+7   at              O               O                 ✔       at             IN      prep    
+8   the             O               O                 ✔       the            DT      det     
+9   pool            O               O                 ✔       pool           NN      pobj    
+10  .               O               O                 ✔       .              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: It will be fewer people today than what I first told you.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   It              O               O                 ✔       it             PRP     nsubj   
+1   will            O               O                 ✔       will           MD      aux     
+2   be              O               O                 ✔       be             VB      ROOT    
+3   fewer           O               O                 ✔       few            JJR     amod    
+4   people          O               O                 ✔       people         NNS     attr    
+5   today           B-date          B-date            ✔       today          NN      npadvmod
+6   than            O               O                 ✔       than           IN      prep    
+7   what            O               O                 ✔       what           WP      dative  
+8   I               O               O                 ✔       I              PRP     nsubj   
+9   first           O               O                 ✔       first          RB      advmod  
+10  told            O               O                 ✔       tell           VBD     pcomp   
+11  you             O               O                 ✔       you            PRP     dobj    
+12  .               O               O                 ✔       .              .       punct   
+
+annotated spans:
+✔ (5, 6): date           
+
+predicted spans:
+✔ (5, 6): date
+
+=============================================================================================
+
+Input: when can I do check in very latest?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   when            O               O                 ✔       when           WRB     advmod  
+1   can             O               O                 ✔       can            MD      aux     
+2   I               O               O                 ✔       I              PRP     nsubj   
+3   do              O               O                 ✔       do             VB      aux     
+4   check           O               O                 ✔       check          VB      ROOT    
+5   in              O               O                 ✔       in             IN      prep    
+6   very            O               O                 ✔       very           RB      advmod  
+7   latest          O               O                 ✔       late           JJS     advmod  
+8   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I want to check out, but still leave my car at the parking spot for few more hours.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   want            O               O                 ✔       want           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   check           O               O                 ✔       check          VB      xcomp   
+4   out             O               O                 ✔       out            RP      prt     
+5   ,               O               O                 ✔       ,              ,       punct   
+6   but             O               O                 ✔       but            CC      cc      
+7   still           O               O                 ✔       still          RB      advmod  
+8   leave           O               O                 ✔       leave          VB      conj    
+9   my              O               O                 ✔       my             PRP$    poss    
+10  car             O               O                 ✔       car            NN      dobj    
+11  at              O               O                 ✔       at             IN      prep    
+12  the             O               O                 ✔       the            DT      det     
+13  parking         O               O                 ✔       parking        NN      compound
+14  spot            O               O                 ✔       spot           NN      pobj    
+15  for             O               O                 ✔       for            IN      prep    
+16  few             B-time_period   O                    ✗    few            JJ      amod    
+17  more            I-time_period   O                    ✗    more           JJR     amod    
+18  hours           I-time_period   I-time_period     ✔       hour           NNS     pobj    
+19  .               O               O                 ✔       .              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (16, 19): time_period    
+
+predicted spans (incorrectly extracted from BIO tags):
+
+=============================================================================================
+
+Input: I'd like to rebook for a later date, say, Wednesday 26th October
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   'd              O               O                 ✔       would          MD      aux     
+2   like            O               O                 ✔       like           VB      ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   rebook          O               O                 ✔       rebook         VB      xcomp   
+5   for             O               O                 ✔       for            IN      prep    
+6   a               O               O                 ✔       a              DT      det     
+7   later           O               O                 ✔       later          JJ      amod    
+8   date            O               O                 ✔       date           NN      pobj    
+9   ,               O               O                 ✔       ,              ,       punct   
+10  say             O               O                 ✔       say            UH      intj    
+11  ,               O               O                 ✔       ,              ,       punct   
+12  Wednesday       B-date_from     B-date_to            ✗    Wednesday      NNP     compound
+13  26th            I-date_from     B-date_to            ✗    26th           NN      npadvmod
+14  October         I-date_from     I-date_to            ✗    October        NNP     npadvmod
+
+annotated spans:
+  (12, 15): date_from      
+
+predicted spans:
+  (12, 13): date_to
+  (13, 15): date_to
+
+=============================================================================================
+
+Input: new
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   new             O               O                 ✔       new            JJ      ROOT    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Where exactly is the pool?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Where           O               O                 ✔       where          WRB     advmod  
+1   exactly         O               O                 ✔       exactly        RB      advmod  
+2   is              O               O                 ✔       be             VBZ     ROOT    
+3   the             O               O                 ✔       the            DT      det     
+4   pool            O               O                 ✔       pool           NN      nsubj   
+5   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I have just one dog I wanted to have in my room, can I make sure that is ok
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   have            O               O                 ✔       have           VBP     ccomp   
+2   just            O               O                 ✔       just           RB      advmod  
+3   one             O               O                 ✔       one            CD      nummod  
+4   dog             O               O                 ✔       dog            NN      dobj    
+5   I               O               O                 ✔       I              PRP     nsubj   
+6   wanted          O               O                 ✔       want           VBD     relcl   
+7   to              O               O                 ✔       to             TO      aux     
+8   have            O               O                 ✔       have           VB      xcomp   
+9   in              O               O                 ✔       in             IN      prep    
+10  my              O               O                 ✔       my             PRP$    poss    
+11  room            O               O                 ✔       room           NN      pobj    
+12  ,               O               O                 ✔       ,              ,       punct   
+13  can             O               O                 ✔       can            MD      aux     
+14  I               O               O                 ✔       I              PRP     nsubj   
+15  make            O               O                 ✔       make           VB      ROOT    
+16  sure            O               O                 ✔       sure           JJ      ccomp   
+17  that            O               O                 ✔       that           DT      nsubj   
+18  is              O               O                 ✔       be             VBZ     ccomp   
+19  ok              O               O                 ✔       ok             JJ      acomp   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: heck no!
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   heck            O               O                 ✔       heck           UH      ROOT    
+1   no              O               O                 ✔       no             UH      intj    
+2   !               O               O                 ✔       !              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Do you guys have a WiFi password?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Do              O               O                 ✔       do             VBP     aux     
+1   you             O               O                 ✔       you            PRP     nmod    
+2   guys            O               O                 ✔       guy            NNS     nsubj   
+3   have            O               O                 ✔       have           VB      ROOT    
+4   a               O               O                 ✔       a              DT      det     
+5   WiFi            O               O                 ✔       WiFi           NNP     compound
+6   password        O               O                 ✔       password       NN      dobj    
+7   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Can someone fix air conditioning in my room, please?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Can             O               O                 ✔       can            MD      aux     
+1   someone         O               O                 ✔       someone        NN      nsubj   
+2   fix             O               O                 ✔       fix            VB      ccomp   
+3   air             O               O                 ✔       air            NN      compound
+4   conditioning    O               O                 ✔       conditioning   NN      dobj    
+5   in              O               O                 ✔       in             IN      prep    
+6   my              O               O                 ✔       my             PRP$    poss    
+7   room            O               O                 ✔       room           NN      pobj    
+8   ,               O               O                 ✔       ,              ,       punct   
+9   please          O               O                 ✔       please         UH      ROOT    
+10  ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: having a jacuzzi is definitely more than what I expected
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   having          O               O                 ✔       have           VBG     csubj   
+1   a               O               O                 ✔       a              DT      det     
+2   jacuzzi         O               O                 ✔       jacuzzi        NN      dobj    
+3   is              O               O                 ✔       be             VBZ     ROOT    
+4   definitely      O               O                 ✔       definitely     RB      advmod  
+5   more            O               O                 ✔       more           JJR     acomp   
+6   than            O               O                 ✔       than           IN      prep    
+7   what            O               O                 ✔       what           WP      dobj    
+8   I               O               O                 ✔       I              PRP     nsubj   
+9   expected        O               O                 ✔       expect         VBD     pcomp   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I heard there you have a jogging trail
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   heard           O               O                 ✔       hear           VBD     ROOT    
+2   there           O               O                 ✔       there          RB      advmod  
+3   you             O               O                 ✔       you            PRP     nsubj   
+4   have            O               O                 ✔       have           VBP     ccomp   
+5   a               O               O                 ✔       a              DT      det     
+6   jogging         O               O                 ✔       jog            VBG     amod    
+7   trail           O               O                 ✔       trail          NN      dobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: How much is extra parking?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   How             O               O                 ✔       how            WRB     advmod  
+1   much            O               O                 ✔       much           JJ      acomp   
+2   is              O               O                 ✔       be             VBZ     ROOT    
+3   extra           O               O                 ✔       extra          JJ      amod    
+4   parking         O               O                 ✔       parking        NN      nsubj   
+5   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: We'll be coming with 1 cars and will probably need the same number of parking spots.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   We              O               O                 ✔       we             PRP     nsubj   
+1   'll             O               O                 ✔       will           MD      aux     
+2   be              O               O                 ✔       be             VB      aux     
+3   coming          O               O                 ✔       come           VBG     ROOT    
+4   with            O               O                 ✔       with           IN      prep    
+5   1               B-number        B-date_period        ✗    1              CD      nummod  
+6   cars            O               O                 ✔       car            NNS     pobj    
+7   and             O               O                 ✔       and            CC      cc      
+8   will            O               O                 ✔       will           MD      aux     
+9   probably        O               O                 ✔       probably       RB      advmod  
+10  need            O               O                 ✔       need           VB      conj    
+11  the             O               O                 ✔       the            DT      det     
+12  same            O               O                 ✔       same           JJ      amod    
+13  number          O               O                 ✔       number         NN      dobj    
+14  of              O               O                 ✔       of             IN      prep    
+15  parking         O               O                 ✔       parking        NN      compound
+16  spots           O               O                 ✔       spot           NNS     pobj    
+17  .               O               O                 ✔       .              .       punct   
+
+annotated spans:
+  (5, 6): number         
+
+predicted spans:
+  (5, 6): date_period
+
+=============================================================================================
+
+Input: my camera seems to be missing
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   my              O               O                 ✔       my             PRP$    poss    
+1   camera          O               O                 ✔       camera         NN      nsubj   
+2   seems           O               O                 ✔       seem           VBZ     ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   be              O               O                 ✔       be             VB      aux     
+5   missing         O               O                 ✔       miss           VBG     xcomp   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Where can I leave my car?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Where           O               O                 ✔       where          WRB     advmod  
+1   can             O               O                 ✔       can            MD      aux     
+2   I               O               O                 ✔       I              PRP     nsubj   
+3   leave           O               O                 ✔       leave          VB      ROOT    
+4   my              O               O                 ✔       my             PRP$    poss    
+5   car             O               O                 ✔       car            NN      dobj    
+6   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: any room free this evening already?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   any             O               O                 ✔       any            DT      det     
+1   room            O               O                 ✔       room           NN      nsubj   
+2   free            O               O                 ✔       free           JJ      ROOT    
+3   this            B-time_period   O                    ✗    this           DT      det     
+4   evening         I-time_period   I-time               ✗    evening        NN      npadvmod
+5   already         O               O                 ✔       already        RB      advmod  
+6   ?               O               O                 ✔       ?              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (3, 5): time_period    
+
+predicted spans (incorrectly extracted from BIO tags):
+
+=============================================================================================
+
+Input: cancel the 8 40 in the morning restaurant booking under bruggeman
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   cancel          O               O                 ✔       cancel         VB      ROOT    
+1   the             O               O                 ✔       the            DT      det     
+2   8               B-time          B-adults             ✗    8              CD      compound
+3   40              I-time          O                    ✗    40             CD      dobj    
+4   in              I-time          O                    ✗    in             IN      prep    
+5   the             I-time          O                    ✗    the            DT      det     
+6   morning         I-time          I-time            ✔       morning        NN      compound
+7   restaurant      O               O                 ✔       restaurant     NN      compound
+8   booking         O               O                 ✔       booking        NN      pobj    
+9   under           O               O                 ✔       under          IN      prep    
+10  bruggeman       B-person_name   O                    ✗    bruggeman      NN      pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (2, 7): time           
+  (10, 11): person_name    
+
+predicted spans (incorrectly extracted from BIO tags):
+  (2, 3): adults
+
+=============================================================================================
+
+Input: I want to book a room on behalf of shaida sharon, from Jan the 12th.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   want            O               O                 ✔       want           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   book            O               O                 ✔       book           VB      xcomp   
+4   a               O               O                 ✔       a              DT      det     
+5   room            O               O                 ✔       room           NN      dobj    
+6   on              O               O                 ✔       on             IN      prep    
+7   behalf          O               O                 ✔       behalf         NN      pobj    
+8   of              O               O                 ✔       of             IN      prep    
+9   shaida          B-person_name   O                    ✗    shaida         NNP     compound
+10  sharon          I-person_name   O                    ✗    sharon         NNP     pobj    
+11  ,               O               O                 ✔       ,              ,       punct   
+12  from            O               O                 ✔       from           IN      prep    
+13  Jan             B-date_from     I-date_from          ✗    Jan            NNP     pobj    
+14  the             I-date_from     O                    ✗    the            DT      det     
+15  12th            I-date_from     B-date_from          ✗    12th           NN      appos   
+16  .               O               O                 ✔       .              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (9, 11): person_name    
+  (13, 16): date_from      
+
+predicted spans (incorrectly extracted from BIO tags):
+  (15, 16): date_from
+
+=============================================================================================
+
+Input: I want to get a foot bath on Sunday
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   want            O               O                 ✔       want           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   get             O               O                 ✔       get            VB      xcomp   
+4   a               O               O                 ✔       a              DT      det     
+5   foot            O               O                 ✔       foot           NN      compound
+6   bath            O               O                 ✔       bath           NN      dobj    
+7   on              O               O                 ✔       on             IN      prep    
+8   Sunday          B-date          B-date_to            ✗    Sunday         NNP     pobj    
+
+annotated spans:
+  (8, 9): date           
+
+predicted spans:
+  (8, 9): date_to
+
+=============================================================================================
+
+Input: Is there a cash machine on the premises?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Is              O               O                 ✔       be             VBZ     ROOT    
+1   there           O               O                 ✔       there          EX      expl    
+2   a               O               O                 ✔       a              DT      det     
+3   cash            O               O                 ✔       cash           NN      compound
+4   machine         O               O                 ✔       machine        NN      attr    
+5   on              O               O                 ✔       on             IN      prep    
+6   the             O               O                 ✔       the            DT      det     
+7   premises        O               O                 ✔       premise        NNS     pobj    
+8   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: speak to room service
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   speak           O               O                 ✔       speak          VB      ROOT    
+1   to              O               O                 ✔       to             TO      aux     
+2   room            O               O                 ✔       room           NN      compound
+3   service         O               O                 ✔       service        NN      dobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I have a reservation and I need to change the number of adults
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   have            O               O                 ✔       have           VBP     ROOT    
+2   a               O               O                 ✔       a              DT      det     
+3   reservation     O               O                 ✔       reservation    NN      dobj    
+4   and             O               O                 ✔       and            CC      cc      
+5   I               O               O                 ✔       I              PRP     nsubj   
+6   need            O               O                 ✔       need           VBP     conj    
+7   to              O               O                 ✔       to             TO      aux     
+8   change          O               O                 ✔       change         VB      xcomp   
+9   the             O               O                 ✔       the            DT      det     
+10  number          O               O                 ✔       number         NN      dobj    
+11  of              O               O                 ✔       of             IN      prep    
+12  adults          O               O                 ✔       adult          NNS     pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I have a booking and I need to amend the number of adults
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   have            O               O                 ✔       have           VBP     ROOT    
+2   a               O               O                 ✔       a              DT      det     
+3   booking         O               O                 ✔       booking        NN      dobj    
+4   and             O               O                 ✔       and            CC      cc      
+5   I               O               O                 ✔       I              PRP     nsubj   
+6   need            O               O                 ✔       need           VBP     conj    
+7   to              O               O                 ✔       to             TO      aux     
+8   amend           O               O                 ✔       amend          VB      xcomp   
+9   the             O               O                 ✔       the            DT      det     
+10  number          O               O                 ✔       number         NN      dobj    
+11  of              O               O                 ✔       of             IN      prep    
+12  adults          O               O                 ✔       adult          NNS     pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I have a booking and I need to change the number of adults
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   have            O               O                 ✔       have           VBP     ROOT    
+2   a               O               O                 ✔       a              DT      det     
+3   booking         O               O                 ✔       booking        NN      dobj    
+4   and             O               O                 ✔       and            CC      cc      
+5   I               O               O                 ✔       I              PRP     nsubj   
+6   need            O               O                 ✔       need           VBP     conj    
+7   to              O               O                 ✔       to             TO      aux     
+8   change          O               O                 ✔       change         VB      xcomp   
+9   the             O               O                 ✔       the            DT      det     
+10  number          O               O                 ✔       number         NN      dobj    
+11  of              O               O                 ✔       of             IN      prep    
+12  adults          O               O                 ✔       adult          NNS     pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I have a reservation and I need to amend the number of adults
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   have            O               O                 ✔       have           VBP     ROOT    
+2   a               O               O                 ✔       a              DT      det     
+3   reservation     O               O                 ✔       reservation    NN      dobj    
+4   and             O               O                 ✔       and            CC      cc      
+5   I               O               O                 ✔       I              PRP     nsubj   
+6   need            O               O                 ✔       need           VBP     conj    
+7   to              O               O                 ✔       to             TO      aux     
+8   amend           O               O                 ✔       amend          VB      xcomp   
+9   the             O               O                 ✔       the            DT      det     
+10  number          O               O                 ✔       number         NN      dobj    
+11  of              O               O                 ✔       of             IN      prep    
+12  adults          O               O                 ✔       adult          NNS     pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: please change the time of my table booking
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   please          O               O                 ✔       please         UH      intj    
+1   change          O               O                 ✔       change         VB      ROOT    
+2   the             O               O                 ✔       the            DT      det     
+3   time            O               O                 ✔       time           NN      dobj    
+4   of              O               O                 ✔       of             IN      prep    
+5   my              O               O                 ✔       my             PRP$    poss    
+6   table           O               O                 ✔       table          NN      compound
+7   booking         O               O                 ✔       booking        NN      pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I want to modify the adults
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   want            O               O                 ✔       want           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   modify          O               O                 ✔       modify         VB      xcomp   
+4   the             O               O                 ✔       the            DT      det     
+5   adults          O               O                 ✔       adult          NNS     dobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Looking for a room from the 1st to the 17th for 8 people
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Looking         O               O                 ✔       look           VBG     ROOT    
+1   for             O               O                 ✔       for            IN      prep    
+2   a               O               O                 ✔       a              DT      det     
+3   room            O               O                 ✔       room           NN      pobj    
+4   from            O               O                 ✔       from           IN      prep    
+5   the             O               O                 ✔       the            DT      det     
+6   1st             B-date_from     I-date_to            ✗    1st            NN      pobj    
+7   to              O               O                 ✔       to             IN      prep    
+8   the             O               O                 ✔       the            DT      det     
+9   17th            B-date_to       B-date_from          ✗    17th           NN      pobj    
+10  for             O               O                 ✔       for            IN      prep    
+11  8               B-people        B-adults             ✗    8              CD      nummod  
+12  people          O               O                 ✔       people         NNS     pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (6, 7): date_from      
+  (9, 10): date_to        
+  (11, 12): people         
+
+predicted spans (incorrectly extracted from BIO tags):
+  (9, 10): date_from
+  (11, 12): adults
+
+=============================================================================================
+
+Input: Tuesday March 3
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Tuesday         B-date          B-date_from          ✗    Tuesday        NNP     compound
+1   March           I-date          B-date_to            ✗    March          NNP     ROOT    
+2   3               I-date          B-date_period        ✗    3              CD      nummod  
+
+annotated spans:
+  (0, 3): date           
+
+predicted spans:
+  (0, 1): date_from
+  (1, 2): date_to
+  (2, 3): date_period
+
+=============================================================================================
+
+Input: Sunday
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Sunday          B-date          B-date_to            ✗    Sunday         NNP     ROOT    
+
+annotated spans:
+  (0, 1): date           
+
+predicted spans:
+  (0, 1): date_to
+
+=============================================================================================
+
+Input: I'd like an en suite room for 2 adults please
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   'd              O               O                 ✔       would          MD      aux     
+2   like            O               O                 ✔       like           VB      ROOT    
+3   an              B-rooms         O                    ✗    an             DT      det     
+4   en              I-rooms         O                    ✗    en             FW      compound
+5   suite           I-rooms         I-rooms           ✔       suite          NN      compound
+6   room            I-rooms         O                    ✗    room           NN      dobj    
+7   for             O               O                 ✔       for            IN      prep    
+8   2               B-adults        B-adults          ✔       2              CD      nummod  
+9   adults          I-adults        O                    ✗    adult          NNS     pobj    
+10  please          O               O                 ✔       please         UH      intj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (3, 7): rooms          
+  (8, 10): adults         
+
+predicted spans (incorrectly extracted from BIO tags):
+  (8, 9): adults
+
+=============================================================================================
+
+Input: a double room for tomorrow for 8 days
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   a               B-rooms         O                    ✗    a              DT      det     
+1   double          I-rooms         I-rooms           ✔       double         JJ      amod    
+2   room            I-rooms         O                    ✗    room           NN      ROOT    
+3   for             O               O                 ✔       for            IN      prep    
+4   tomorrow        B-date_from     B-date               ✗    tomorrow       NN      pobj    
+5   for             O               O                 ✔       for            IN      prep    
+6   8               B-date_period   B-adults             ✗    8              CD      nummod  
+7   days            I-date_period   I-date               ✗    day            NNS     pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (0, 3): rooms          
+  (4, 5): date_from      
+  (6, 8): date_period    
+
+predicted spans (incorrectly extracted from BIO tags):
+  (4, 5): date
+  (6, 8): adults
+
+=============================================================================================
+
+Input: From the 16th to the 30th, a single room for 2 adults and 1 child.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   From            O               O                 ✔       from           IN      prep    
+1   the             O               O                 ✔       the            DT      det     
+2   16th            B-date_from     B-date_from       ✔       16th           NN      pobj    
+3   to              O               O                 ✔       to             IN      prep    
+4   the             O               O                 ✔       the            DT      det     
+5   30th            B-date_to       O                    ✗    30th           NN      pobj    
+6   ,               O               O                 ✔       ,              ,       punct   
+7   a               B-rooms         O                    ✗    a              DT      det     
+8   single          I-rooms         I-rooms           ✔       single         JJ      amod    
+9   room            I-rooms         O                    ✗    room           NN      ROOT    
+10  for             O               O                 ✔       for            IN      prep    
+11  2               B-adults        B-adults          ✔       2              CD      nummod  
+12  adults          O               O                 ✔       adult          NNS     pobj    
+13  and             O               O                 ✔       and            CC      cc      
+14  1               B-kids          B-date_period        ✗    1              CD      nummod  
+15  child           O               O                 ✔       child          NN      conj    
+16  .               O               O                 ✔       .              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+✔ (2, 3): date_from      
+  (5, 6): date_to        
+  (7, 10): rooms          
+✔ (11, 12): adults         
+  (14, 15): kids           
+
+predicted spans (incorrectly extracted from BIO tags):
+✔ (2, 3): date_from
+✔ (11, 12): adults
+  (14, 15): date_period
+
+=============================================================================================
+
+Input: I want to book for today
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   want            O               O                 ✔       want           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   book            O               O                 ✔       book           VB      xcomp   
+4   for             O               O                 ✔       for            IN      prep    
+5   today           B-date_from     B-date               ✗    today          NN      pobj    
+
+annotated spans:
+  (5, 6): date_from      
+
+predicted spans:
+  (5, 6): date
+
+=============================================================================================
+
+Input: for a week
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   for             O               O                 ✔       for            IN      ROOT    
+1   a               B-date_period   O                    ✗    a              DT      det     
+2   week            I-date_period   I-date_period     ✔       week           NN      pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (1, 3): date_period    
+
+predicted spans (incorrectly extracted from BIO tags):
+
+=============================================================================================
+
+Input: 5 nights from 15th of October?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   5               B-date_period   B-date_period     ✔       5              CD      nummod  
+1   nights          I-date_period   I-date_period     ✔       night          NNS     ROOT    
+2   from            O               O                 ✔       from           IN      prep    
+3   15th            B-date_from     B-date_to            ✗    15th           NN      pobj    
+4   of              I-date_from     O                    ✗    of             IN      prep    
+5   October         I-date_from     I-date_to            ✗    October        NNP     pobj    
+6   ?               O               O                 ✔       ?              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+✔ (0, 2): date_period    
+  (3, 6): date_from      
+
+predicted spans (incorrectly extracted from BIO tags):
+✔ (0, 2): date_period
+  (3, 4): date_to
+
+=============================================================================================
+
+Input: 2 weeks
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   2               B-date_period   B-adults             ✗    2              CD      nummod  
+1   weeks           I-date_period   O                    ✗    week           NNS     ROOT    
+
+annotated spans:
+  (0, 2): date_period    
+
+predicted spans:
+  (0, 1): adults
+
+=============================================================================================
+
+Input: 1 adults and 8 children. Saturday to Tuesday
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   1               B-adults        B-date_period        ✗    1              CD      nummod  
+1   adults          O               O                 ✔       adult          NNS     ROOT    
+2   and             O               O                 ✔       and            CC      cc      
+3   8               B-kids          B-adults             ✗    8              CD      nummod  
+4   children        O               O                 ✔       child          NNS     conj    
+5   .               O               O                 ✔       .              .       punct   
+6   Saturday        B-date_from     B-date_to            ✗    Saturday       NNP     ROOT    
+7   to              O               O                 ✔       to             IN      prep    
+8   Tuesday         B-date_to       B-date_from          ✗    Tuesday        NNP     pobj    
+
+annotated spans:
+  (0, 1): adults         
+  (3, 4): kids           
+  (6, 7): date_from      
+  (8, 9): date_to        
+
+predicted spans:
+  (0, 1): date_period
+  (3, 4): adults
+  (6, 7): date_to
+  (8, 9): date_from
+
+=============================================================================================
+
+Input: our two kids and I
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   our             O               O                 ✔       our            PRP$    poss    
+1   two             B-kids          B-adults             ✗    two            CD      nummod  
+2   kids            O               O                 ✔       kid            NNS     ROOT    
+3   and             O               O                 ✔       and            CC      cc      
+4   I               B-adults        O                    ✗    I              PRP     conj    
+
+annotated spans:
+  (1, 2): kids           
+  (4, 5): adults         
+
+predicted spans:
+  (1, 2): adults
+
+=============================================================================================
+
+Input: I'd like to arrive on Wednesday
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   'd              O               O                 ✔       would          MD      aux     
+2   like            O               O                 ✔       like           VB      ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   arrive          O               O                 ✔       arrive         VB      xcomp   
+5   on              O               O                 ✔       on             IN      prep    
+6   Wednesday       B-date_from     B-date_to            ✗    Wednesday      NNP     pobj    
+
+annotated spans:
+  (6, 7): date_from      
+
+predicted spans:
+  (6, 7): date_to
+
+=============================================================================================
+
+Input: leaving on the 12th, arriving on the 10th
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   leaving         O               O                 ✔       leave          VBG     ROOT    
+1   on              O               O                 ✔       on             IN      prep    
+2   the             O               O                 ✔       the            DT      det     
+3   12th            B-date_to       B-date_from          ✗    12th           NN      pobj    
+4   ,               O               O                 ✔       ,              ,       punct   
+5   arriving        O               O                 ✔       arrive         VBG     advcl   
+6   on              O               O                 ✔       on             IN      prep    
+7   the             O               O                 ✔       the            DT      det     
+8   10th            B-date_from     B-date_from       ✔       10th           JJ      pobj    
+
+annotated spans:
+  (3, 4): date_to        
+✔ (8, 9): date_from      
+
+predicted spans:
+  (3, 4): date_from
+✔ (8, 9): date_from
+
+=============================================================================================
+
+Input: I'm leaving on Thursday
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   'm              O               O                 ✔       be             VBP     aux     
+2   leaving         O               O                 ✔       leave          VBG     ROOT    
+3   on              O               O                 ✔       on             IN      prep    
+4   Thursday        B-date_to       B-date_from          ✗    Thursday       NNP     npadvmod
+
+annotated spans:
+  (4, 5): date_to        
+
+predicted spans:
+  (4, 5): date_from
+
+=============================================================================================
+
+Input: Something's wrong with the shower, only cold water since 25 past 17 afternoon today.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Something       O               O                 ✔       something      NN      poss    
+1   's              O               O                 ✔       's             POS     case    
+2   wrong           O               O                 ✔       wrong          NN      ROOT    
+3   with            O               O                 ✔       with           IN      prep    
+4   the             O               O                 ✔       the            DT      det     
+5   shower          O               O                 ✔       shower         NN      pobj    
+6   ,               O               O                 ✔       ,              ,       punct   
+7   only            O               O                 ✔       only           RB      advmod  
+8   cold            O               O                 ✔       cold           JJ      amod    
+9   water           O               O                 ✔       water          NN      appos   
+10  since           O               O                 ✔       since          IN      prep    
+11  25              B-time_from     B-time               ✗    25             CD      nummod  
+12  past            I-time_from     I-time               ✗    past           JJ      amod    
+13  17              I-time_from     B-date_from          ✗    17             CD      nummod  
+14  afternoon       I-time_from     I-time               ✗    afternoon      NN      pobj    
+15  today           B-date          B-date            ✔       today          NN      npadvmod
+16  .               O               O                 ✔       .              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (11, 15): time_from      
+✔ (15, 16): date           
+
+predicted spans (incorrectly extracted from BIO tags):
+  (11, 13): time
+  (13, 15): date_from
+✔ (15, 16): date
+
+=============================================================================================
+
+Input: I just wanted to confirm the booking and that's all, thanks and bye-bye!
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   just            O               O                 ✔       just           RB      advmod  
+2   wanted          O               O                 ✔       want           VBD     ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   confirm         O               O                 ✔       confirm        VB      xcomp   
+5   the             O               O                 ✔       the            DT      det     
+6   booking         O               O                 ✔       booking        NN      dobj    
+7   and             O               O                 ✔       and            CC      cc      
+8   that            O               O                 ✔       that           DT      nsubj   
+9   's              O               O                 ✔       be             VBZ     conj    
+10  all             O               O                 ✔       all            DT      attr    
+11  ,               O               O                 ✔       ,              ,       punct   
+12  thanks          O               O                 ✔       thank          NNS     npadvmod
+13  and             O               O                 ✔       and            CC      cc      
+14  bye             O               O                 ✔       bye            UH      conj    
+15  -               O               O                 ✔       -              UH      intj    
+16  bye             O               O                 ✔       bye            NN      conj    
+17  !               O               O                 ✔       !              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: the room was supposedly cleaned but this is still pretty dirty
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   the             O               O                 ✔       the            DT      det     
+1   room            O               O                 ✔       room           NN      nsubjpass
+2   was             O               O                 ✔       be             VBD     auxpass 
+3   supposedly      O               O                 ✔       supposedly     RB      advmod  
+4   cleaned         O               O                 ✔       clean          VBN     ROOT    
+5   but             O               O                 ✔       but            CC      cc      
+6   this            O               O                 ✔       this           DT      nsubj   
+7   is              O               O                 ✔       be             VBZ     conj    
+8   still           O               O                 ✔       still          RB      advmod  
+9   pretty          O               O                 ✔       pretty         RB      advmod  
+10  dirty           O               O                 ✔       dirty          JJ      acomp   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: how much time does a spa session last?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   how             O               O                 ✔       how            WRB     advmod  
+1   much            O               O                 ✔       much           JJ      amod    
+2   time            O               O                 ✔       time           NN      npadvmod
+3   does            O               O                 ✔       do             VBZ     aux     
+4   a               O               O                 ✔       a              DT      det     
+5   spa             O               O                 ✔       spa            NN      compound
+6   session         O               O                 ✔       session        NN      nsubj   
+7   last            O               B-date_period        ✗    last           JJ      ROOT    
+8   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+  (7, 8): date_period
+
+=============================================================================================
+
+Input: can I go to the gym if I am in a wheelchair?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   can             O               O                 ✔       can            MD      aux     
+1   I               O               O                 ✔       I              PRP     nsubj   
+2   go              O               O                 ✔       go             VB      ROOT    
+3   to              O               O                 ✔       to             IN      prep    
+4   the             O               O                 ✔       the            DT      det     
+5   gym             O               O                 ✔       gym            NN      pobj    
+6   if              O               O                 ✔       if             IN      mark    
+7   I               O               O                 ✔       I              PRP     nsubj   
+8   am              O               O                 ✔       be             VBP     advcl   
+9   in              O               O                 ✔       in             IN      prep    
+10  a               O               O                 ✔       a              DT      det     
+11  wheelchair      O               O                 ✔       wheelchair     NN      pobj    
+12  ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: i have doubts about my check in date
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   i               O               O                 ✔       I              PRP     nsubj   
+1   have            O               O                 ✔       have           VBP     ROOT    
+2   doubts          O               O                 ✔       doubt          NNS     dobj    
+3   about           O               O                 ✔       about          IN      prep    
+4   my              O               O                 ✔       my             PRP$    poss    
+5   check           O               O                 ✔       check          NN      pobj    
+6   in              O               O                 ✔       in             IN      prep    
+7   date            O               O                 ✔       date           NN      pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Please tell me that one more time
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Please          O               O                 ✔       please         UH      intj    
+1   tell            O               O                 ✔       tell           VB      ROOT    
+2   me              O               O                 ✔       I              PRP     dobj    
+3   that            O               O                 ✔       that           IN      det     
+4   one             O               O                 ✔       one            CD      nummod  
+5   more            O               O                 ✔       more           JJR     amod    
+6   time            O               O                 ✔       time           NN      npadvmod
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Hello, I am calling due to some issues with online check in.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Hello           O               O                 ✔       hello          UH      intj    
+1   ,               O               O                 ✔       ,              ,       punct   
+2   I               O               O                 ✔       I              PRP     nsubj   
+3   am              O               O                 ✔       be             VBP     aux     
+4   calling         O               O                 ✔       call           VBG     ROOT    
+5   due             O               O                 ✔       due            JJ      prep    
+6   to              O               O                 ✔       to             IN      prep    
+7   some            O               O                 ✔       some           DT      det     
+8   issues          O               O                 ✔       issue          NNS     pobj    
+9   with            O               O                 ✔       with           IN      prep    
+10  online          O               O                 ✔       online         JJ      amod    
+11  check           O               O                 ✔       check          NN      pobj    
+12  in              O               O                 ✔       in             RP      prep    
+13  .               O               O                 ✔       .              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I need to speak to someone at the restaurant.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   need            O               O                 ✔       need           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   speak           O               O                 ✔       speak          VB      xcomp   
+4   to              O               O                 ✔       to             IN      prep    
+5   someone         O               O                 ✔       someone        NN      pobj    
+6   at              O               O                 ✔       at             IN      prep    
+7   the             O               O                 ✔       the            DT      det     
+8   restaurant      O               O                 ✔       restaurant     NN      pobj    
+9   .               O               O                 ✔       .              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I'll arrive earlier than what I thought, can I check in already at 12:45 p.m.?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   'll             O               O                 ✔       will           MD      aux     
+2   arrive          O               O                 ✔       arrive         VB      ccomp   
+3   earlier         O               O                 ✔       early          RBR     advmod  
+4   than            O               O                 ✔       than           IN      prep    
+5   what            O               O                 ✔       what           WP      dobj    
+6   I               O               O                 ✔       I              PRP     nsubj   
+7   thought         O               O                 ✔       think          VBD     pcomp   
+8   ,               O               O                 ✔       ,              ,       punct   
+9   can             O               O                 ✔       can            MD      aux     
+10  I               O               O                 ✔       I              PRP     nsubj   
+11  check           O               O                 ✔       check          VB      ROOT    
+12  in              O               O                 ✔       in             RP      prt     
+13  already         O               O                 ✔       already        RB      advmod  
+14  at              O               O                 ✔       at             IN      prep    
+15  12:45           B-time          O                    ✗    12:45          CD      pobj    
+16  p.m.            I-time          I-time            ✔       p.m.           NN      npadvmod
+17  ?               O               O                 ✔       ?              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (15, 17): time           
+
+predicted spans (incorrectly extracted from BIO tags):
+
+=============================================================================================
+
+Input: when do i need to leave the room my last day?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   when            O               O                 ✔       when           WRB     advmod  
+1   do              O               O                 ✔       do             VBP     aux     
+2   i               O               O                 ✔       I              PRP     nsubj   
+3   need            O               O                 ✔       need           VB      ROOT    
+4   to              O               O                 ✔       to             TO      aux     
+5   leave           O               O                 ✔       leave          VB      xcomp   
+6   the             O               O                 ✔       the            DT      det     
+7   room            O               O                 ✔       room           NN      dobj    
+8   my              O               O                 ✔       my             PRP$    poss    
+9   last            O               B-date_period        ✗    last           JJ      amod    
+10  day             O               I-date_period        ✗    day            NN      npadvmod
+11  ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+  (9, 11): date_period
+
+=============================================================================================
+
+Input: I will be late for my 10 to 4 afternoon restaurant reservation, it's dalana palomares
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   will            O               O                 ✔       will           MD      aux     
+2   be              O               O                 ✔       be             VB      ccomp   
+3   late            O               O                 ✔       late           JJ      acomp   
+4   for             O               O                 ✔       for            IN      prep    
+5   my              O               O                 ✔       my             PRP$    poss    
+6   10              B-time          I-time               ✗    10             CD      quantmod
+7   to              I-time          O                    ✗    to             TO      quantmod
+8   4               I-time          B-people             ✗    4              CD      nummod  
+9   afternoon       I-time          I-time            ✔       afternoon      NN      compound
+10  restaurant      O               O                 ✔       restaurant     NN      compound
+11  reservation     O               O                 ✔       reservation    NN      pobj    
+12  ,               O               O                 ✔       ,              ,       punct   
+13  it              O               O                 ✔       it             PRP     nsubj   
+14  's              O               O                 ✔       be             VBZ     ROOT    
+15  dalana          B-person_name   O                    ✗    dalana         NNP     compound
+16  palomares       I-person_name   O                    ✗    palomare       NNS     attr    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (6, 10): time           
+  (15, 17): person_name    
+
+predicted spans (incorrectly extracted from BIO tags):
+  (8, 10): people
+
+=============================================================================================
+
+Input: yep, book it under jon!
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   yep             O               O                 ✔       yep            UH      intj    
+1   ,               O               O                 ✔       ,              ,       punct   
+2   book            O               O                 ✔       book           NN      ROOT    
+3   it              O               O                 ✔       it             PRP     dobj    
+4   under           O               O                 ✔       under          IN      prep    
+5   jon             O               O                 ✔       jon            NN      pobj    
+6   !               O               O                 ✔       !              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: i don't have a booking yet
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   i               O               O                 ✔       I              PRP     nsubj   
+1   do              O               O                 ✔       do             VBP     aux     
+2   n't             O               O                 ✔       not            RB      neg     
+3   have            O               O                 ✔       have           VB      ROOT    
+4   a               O               O                 ✔       a              DT      det     
+5   booking         O               O                 ✔       booking        NN      dobj    
+6   yet             O               O                 ✔       yet            RB      advmod  
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: i want to swim
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   i               O               O                 ✔       I              PRP     nsubj   
+1   want            O               O                 ✔       want           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   swim            O               O                 ✔       swim           VB      xcomp   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I'll be arriving with my 4 dogs. Can they enter the premises?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   'll             O               O                 ✔       will           MD      aux     
+2   be              O               O                 ✔       be             VB      aux     
+3   arriving        O               O                 ✔       arrive         VBG     ROOT    
+4   with            O               O                 ✔       with           IN      prep    
+5   my              O               O                 ✔       my             PRP$    poss    
+6   4               B-number        B-people             ✗    4              CD      nummod  
+7   dogs            O               O                 ✔       dog            NNS     pobj    
+8   .               O               O                 ✔       .              .       punct   
+9   Can             O               O                 ✔       can            MD      aux     
+10  they            O               O                 ✔       they           PRP     nsubj   
+11  enter           O               O                 ✔       enter          VB      ROOT    
+12  the             O               O                 ✔       the            DT      det     
+13  premises        O               O                 ✔       premise        NNS     dobj    
+14  ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+  (6, 7): number         
+
+predicted spans:
+  (6, 7): people
+
+=============================================================================================
+
+Input: no no not right now
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   no              O               O                 ✔       no             UH      ROOT    
+1   no              O               O                 ✔       no             UH      intj    
+2   not             O               O                 ✔       not            RB      neg     
+3   right           O               O                 ✔       right          RB      advmod  
+4   now             O               O                 ✔       now            RB      advmod  
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: internet is not working
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   internet        O               O                 ✔       internet       NN      nsubj   
+1   is              O               O                 ✔       be             VBZ     aux     
+2   not             O               O                 ✔       not            RB      neg     
+3   working         O               O                 ✔       work           VBG     ROOT    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: Double room within jacuzzi for a couple. Check in 6th of Sep and check out 22nd of Sep
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Double          B-rooms         O                    ✗    double         JJ      amod    
+1   room            I-rooms         O                    ✗    room           NN      ROOT    
+2   within          O               O                 ✔       within         IN      prep    
+3   jacuzzi         O               O                 ✔       jacuzzi        NNP     pobj    
+4   for             O               O                 ✔       for            IN      prep    
+5   a               B-adults        O                    ✗    a              DT      det     
+6   couple          I-adults        I-date               ✗    couple         NN      pobj    
+7   .               O               O                 ✔       .              .       punct   
+8   Check           O               O                 ✔       check          VB      ROOT    
+9   in              O               O                 ✔       in             IN      prep    
+10  6th             B-date_from     I-date_to            ✗    6th            NN      pobj    
+11  of              I-date_from     O                    ✗    of             IN      prep    
+12  Sep             I-date_from     B-date_from          ✗    Sep            NNP     pobj    
+13  and             O               O                 ✔       and            CC      cc      
+14  check           O               O                 ✔       check          VB      conj    
+15  out             O               O                 ✔       out            RP      prt     
+16  22nd            B-date_to       B-date_from          ✗    22nd           NN      dobj    
+17  of              I-date_to       O                    ✗    of             IN      prep    
+18  Sep             I-date_to       B-date_from          ✗    Sep            NNP     pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (0, 2): rooms          
+  (5, 7): adults         
+  (10, 13): date_from      
+  (16, 19): date_to        
+
+predicted spans (incorrectly extracted from BIO tags):
+  (12, 13): date_from
+  (16, 17): date_from
+  (18, 19): date_from
+
+=============================================================================================
+
+Input: is it possible to reserve a treadmill in the gym?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   is              O               O                 ✔       be             VBZ     ROOT    
+1   it              O               O                 ✔       it             PRP     nsubj   
+2   possible        O               O                 ✔       possible       JJ      acomp   
+3   to              O               O                 ✔       to             TO      aux     
+4   reserve         O               O                 ✔       reserve        VB      xcomp   
+5   a               O               O                 ✔       a              DT      det     
+6   treadmill       O               O                 ✔       treadmill      NN      dobj    
+7   in              O               O                 ✔       in             IN      prep    
+8   the             O               O                 ✔       the            DT      det     
+9   gym             O               O                 ✔       gym            NN      pobj    
+10  ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: whats the price of skincare treatments?
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   what            O               O                 ✔       what           WP      attr    
+1   s               O               O                 ✔       s              VBZ     ROOT    
+2   the             O               O                 ✔       the            DT      det     
+3   price           O               O                 ✔       price          NN      nsubj   
+4   of              O               O                 ✔       of             IN      prep    
+5   skincare        O               O                 ✔       skincare       NN      compound
+6   treatments      O               O                 ✔       treatment      NNS     pobj    
+7   ?               O               O                 ✔       ?              .       punct   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: it will be 7
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   it              O               O                 ✔       it             PRP     nsubj   
+1   will            O               O                 ✔       will           MD      aux     
+2   be              O               O                 ✔       be             VB      ROOT    
+3   7               B-number        B-date_period        ✗    7              CD      attr    
+
+annotated spans:
+  (3, 4): number         
+
+predicted spans:
+  (3, 4): date_period
+
+=============================================================================================
+
+Input: Lost property
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Lost            O               O                 ✔       lose           VBN     amod    
+1   property        O               O                 ✔       property       NN      ROOT    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I might pick up a rental car, do you have parking on site
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   might           O               O                 ✔       might          MD      aux     
+2   pick            O               O                 ✔       pick           VB      ccomp   
+3   up              O               O                 ✔       up             RP      prt     
+4   a               O               O                 ✔       a              DT      det     
+5   rental          O               O                 ✔       rental         JJ      amod    
+6   car             O               O                 ✔       car            NN      dobj    
+7   ,               O               O                 ✔       ,              ,       punct   
+8   do              O               O                 ✔       do             VBP     aux     
+9   you             O               O                 ✔       you            PRP     nsubj   
+10  have            O               O                 ✔       have           VB      ROOT    
+11  parking         O               O                 ✔       parking        NN      dobj    
+12  on              O               O                 ✔       on             IN      prep    
+13  site            O               O                 ✔       site           NN      pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I want to stay tomorrow night
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   want            O               O                 ✔       want           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   stay            O               O                 ✔       stay           VB      xcomp   
+4   tomorrow        B-date_from     B-date               ✗    tomorrow       NN      compound
+5   night           B-time_period   I-date_period        ✗    night          NN      npadvmod
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (4, 5): date_from      
+  (5, 6): time_period    
+
+predicted spans (incorrectly extracted from BIO tags):
+  (4, 6): date
+
+=============================================================================================
+
+Input: i cant make it to my restaurant booking at 2:10 night
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   i               O               O                 ✔       I              PRP     nsubj   
+1   ca              O               O                 ✔       can            MD      aux     
+2   nt              O               O                 ✔       not            RB      neg     
+3   make            O               O                 ✔       make           VB      ROOT    
+4   it              O               O                 ✔       it             PRP     dobj    
+5   to              O               O                 ✔       to             IN      prep    
+6   my              O               O                 ✔       my             PRP$    poss    
+7   restaurant      O               O                 ✔       restaurant     NN      compound
+8   booking         O               O                 ✔       booking        NN      pobj    
+9   at              O               O                 ✔       at             IN      prep    
+10  2:10            B-time          B-time            ✔       2:10           CD      nummod  
+11  night           I-time          I-date_period        ✗    night          NN      pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+✔ (10, 12): time           
+
+predicted spans (incorrectly extracted from BIO tags):
+✔ (10, 12): time
+
+=============================================================================================
+
+Input: please just cancel that booking for murad as I got ill.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   please          O               O                 ✔       please         UH      intj    
+1   just            O               O                 ✔       just           RB      advmod  
+2   cancel          O               O                 ✔       cancel         VB      ROOT    
+3   that            O               O                 ✔       that           IN      det     
+4   booking         O               O                 ✔       booking        NN      dobj    
+5   for             O               O                 ✔       for            IN      prep    
+6   murad           B-person_name   O                    ✗    murad          NN      pobj    
+7   as              O               O                 ✔       as             IN      mark    
+8   I               O               O                 ✔       I              PRP     nsubj   
+9   got             O               O                 ✔       get            VBD     advcl   
+10  ill             O               O                 ✔       ill            JJ      acomp   
+11  .               O               O                 ✔       .              .       punct   
+
+annotated spans:
+  (6, 7): person_name    
+
+predicted spans:
+
+=============================================================================================
+
+Input: i need to change the time of my makeup service tomorrow
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   i               O               O                 ✔       I              PRP     nsubj   
+1   need            O               O                 ✔       need           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   change          O               O                 ✔       change         VB      xcomp   
+4   the             O               O                 ✔       the            DT      det     
+5   time            O               O                 ✔       time           NN      dobj    
+6   of              O               O                 ✔       of             IN      prep    
+7   my              O               O                 ✔       my             PRP$    poss    
+8   makeup          O               O                 ✔       makeup         NN      compound
+9   service         O               O                 ✔       service        NN      pobj    
+10  tomorrow        B-date          B-date            ✔       tomorrow       NN      npadvmod
+
+annotated spans:
+✔ (10, 11): date           
+
+predicted spans:
+✔ (10, 11): date
+
+=============================================================================================
+
+Input: How do I order caesar salad
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   How             O               O                 ✔       how            WRB     advmod  
+1   do              O               O                 ✔       do             VBP     aux     
+2   I               O               O                 ✔       I              PRP     nsubj   
+3   order           O               O                 ✔       order          VB      ROOT    
+4   caesar          O               O                 ✔       caesar         NNP     compound
+5   salad           O               O                 ✔       salad          VBD     ccomp   
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: we are in our room and hungry
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   we              O               O                 ✔       we             PRP     nsubj   
+1   are             O               O                 ✔       be             VBP     ROOT    
+2   in              O               O                 ✔       in             IN      prep    
+3   our             O               O                 ✔       our            PRP$    poss    
+4   room            O               O                 ✔       room           NN      pobj    
+5   and             O               O                 ✔       and            CC      cc      
+6   hungry          O               O                 ✔       hungry         JJ      conj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I have a booking
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   have            O               O                 ✔       have           VBP     ROOT    
+2   a               O               O                 ✔       a              DT      det     
+3   booking         O               O                 ✔       booking        NN      dobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: 6 15 I have a table booking
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   6               B-time          B-date_period        ✗    6              CD      compound
+1   15              I-time          B-time               ✗    15             CD      npadvmod
+2   I               O               O                 ✔       I              PRP     nsubj   
+3   have            O               O                 ✔       have           VBP     ROOT    
+4   a               O               O                 ✔       a              DT      det     
+5   table           O               O                 ✔       table          NN      compound
+6   booking         O               O                 ✔       booking        NN      dobj    
+
+annotated spans:
+  (0, 2): time           
+
+predicted spans:
+  (0, 1): date_period
+  (1, 2): time
+
+=============================================================================================
+
+Input: I need a dinning reservation for 5 people on March 13th at 9 pm
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   need            O               O                 ✔       need           VBP     ROOT    
+2   a               O               O                 ✔       a              DT      det     
+3   dinning         O               O                 ✔       dinning        NN      amod    
+4   reservation     O               O                 ✔       reservation    NN      dobj    
+5   for             O               O                 ✔       for            IN      prep    
+6   5               B-people        B-date_period        ✗    5              CD      nummod  
+7   people          O               O                 ✔       people         NNS     pobj    
+8   on              O               O                 ✔       on             IN      prep    
+9   March           B-date          B-date_to            ✗    March          NNP     compound
+10  13th            I-date          B-date_to            ✗    13th           NN      pobj    
+11  at              O               O                 ✔       at             IN      prep    
+12  9               B-time          B-adults             ✗    9              CD      nummod  
+13  pm              I-time          I-time            ✔       pm             NN      pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (6, 7): people         
+  (9, 11): date           
+  (12, 14): time           
+
+predicted spans (incorrectly extracted from BIO tags):
+  (6, 7): date_period
+  (9, 10): date_to
+  (10, 11): date_to
+  (12, 14): adults
+
+=============================================================================================
+
+Input: I just want to change some details of my hotel booking
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   just            O               O                 ✔       just           RB      advmod  
+2   want            O               O                 ✔       want           VBP     ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   change          O               O                 ✔       change         VB      xcomp   
+5   some            O               O                 ✔       some           DT      det     
+6   details         O               O                 ✔       detail         NNS     dobj    
+7   of              O               O                 ✔       of             IN      prep    
+8   my              O               O                 ✔       my             PRP$    poss    
+9   hotel           O               O                 ✔       hotel          NN      compound
+10  booking         O               O                 ✔       booking        NN      pobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: I want to change one
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   want            O               O                 ✔       want           VBP     ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   change          O               O                 ✔       change         VB      xcomp   
+4   one             O               O                 ✔       one            CD      dobj    
+
+annotated spans:
+
+predicted spans:
+
+=============================================================================================
+
+Input: We would like one family room for four from Thursday until Thursday
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   We              O               O                 ✔       we             PRP     nsubj   
+1   would           O               O                 ✔       would          MD      aux     
+2   like            O               O                 ✔       like           VB      ROOT    
+3   one             B-rooms         O                    ✗    one            CD      nummod  
+4   family          O               I-rooms              ✗    family         NN      compound
+5   room            O               O                 ✔       room           NN      dobj    
+6   for             O               O                 ✔       for            IN      prep    
+7   four            B-people        B-people          ✔       four           CD      pobj    
+8   from            O               O                 ✔       from           IN      prep    
+9   Thursday        B-date_from     B-date_from       ✔       Thursday       NNP     pobj    
+10  until           O               O                 ✔       until          IN      prep    
+11  Thursday        B-date_to       B-date_from          ✗    Thursday       NNP     pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (3, 4): rooms          
+✔ (7, 8): people         
+✔ (9, 10): date_from      
+  (11, 12): date_to        
+
+predicted spans (incorrectly extracted from BIO tags):
+✔ (7, 8): people
+✔ (9, 10): date_from
+  (11, 12): date_from
+
+=============================================================================================
+
+Input: I'd like to make a reservation for 5 people from Sunday 10 July
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   'd              O               O                 ✔       would          MD      aux     
+2   like            O               O                 ✔       like           VB      ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   make            O               O                 ✔       make           VB      xcomp   
+5   a               O               O                 ✔       a              DT      det     
+6   reservation     O               O                 ✔       reservation    NN      dobj    
+7   for             O               O                 ✔       for            IN      prep    
+8   5               B-people        B-date_period        ✗    5              CD      nummod  
+9   people          O               O                 ✔       people         NNS     pobj    
+10  from            O               O                 ✔       from           IN      prep    
+11  Sunday          B-date_from     B-date_to            ✗    Sunday         NNP     pobj    
+12  10              I-date_from     I-time               ✗    10             CD      nummod  
+13  July            I-date_from     I-date_to            ✗    July           NNP     npadvmod
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (8, 9): people         
+  (11, 14): date_from      
+
+predicted spans (incorrectly extracted from BIO tags):
+  (8, 9): date_period
+  (11, 14): date_to
+
+=============================================================================================
+
+Input: 18th of Nov
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   18th            B-date          B-date_from          ✗    18th           NN      ROOT    
+1   of              I-date          O                    ✗    of             IN      prep    
+2   Nov             I-date          I-date_from          ✗    Nov            NNP     pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (0, 3): date           
+
+predicted spans (incorrectly extracted from BIO tags):
+  (0, 1): date_from
+
+=============================================================================================
+
+Input: One bedroom, 2 adults and one minor child.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   One             B-rooms         B-adults             ✗    one            CD      nummod  
+1   bedroom         O               O                 ✔       bedroom        NN      ROOT    
+2   ,               O               O                 ✔       ,              ,       punct   
+3   2               B-adults        B-adults          ✔       2              CD      nummod  
+4   adults          O               O                 ✔       adult          NNS     appos   
+5   and             O               O                 ✔       and            CC      cc      
+6   one             B-kids          O                    ✗    one            CD      nummod  
+7   minor           O               O                 ✔       minor          JJ      amod    
+8   child           O               O                 ✔       child          NN      conj    
+9   .               O               O                 ✔       .              .       punct   
+
+annotated spans:
+  (0, 1): rooms          
+✔ (3, 4): adults         
+  (6, 7): kids           
+
+predicted spans:
+  (0, 1): adults
+✔ (3, 4): adults
+
+=============================================================================================
+
+Input: I would like to book a hotel for 2 nights for 6 in three rooms for Friday to Sunday so we can go drinking
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   would           O               O                 ✔       would          MD      aux     
+2   like            O               O                 ✔       like           VB      ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   book            O               O                 ✔       book           VB      xcomp   
+5   a               O               O                 ✔       a              DT      det     
+6   hotel           O               O                 ✔       hotel          NN      dobj    
+7   for             O               O                 ✔       for            IN      prep    
+8   2               B-date_period   B-adults             ✗    2              CD      nummod  
+9   nights          I-date_period   I-date_period     ✔       night          NNS     pobj    
+10  for             O               O                 ✔       for            IN      prep    
+11  6               O               B-date_period        ✗    6              CD      pobj    
+12  in              O               O                 ✔       in             IN      prep    
+13  three           B-rooms         B-date_period        ✗    three          CD      nummod  
+14  rooms           O               O                 ✔       room           NNS     pobj    
+15  for             O               O                 ✔       for            IN      prep    
+16  Friday          B-date_from     B-date_from       ✔       Friday         NNP     pobj    
+17  to              O               O                 ✔       to             IN      prep    
+18  Sunday          B-date_to       B-date_to         ✔       Sunday         NNP     pobj    
+19  so              O               O                 ✔       so             IN      mark    
+20  we              O               O                 ✔       we             PRP     nsubj   
+21  can             O               O                 ✔       can            MD      aux     
+22  go              O               O                 ✔       go             VB      advcl   
+23  drinking        O               O                 ✔       drink          VBG     xcomp   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (8, 10): date_period    
+  (13, 14): rooms          
+✔ (16, 17): date_from      
+✔ (18, 19): date_to        
+
+predicted spans (incorrectly extracted from BIO tags):
+  (8, 10): adults
+  (11, 12): date_period
+  (13, 14): date_period
+✔ (16, 17): date_from
+✔ (18, 19): date_to
+
+=============================================================================================
+
+Input: I would like to stay for a fortnight in the cheapest room you have
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   would           O               O                 ✔       would          MD      aux     
+2   like            O               O                 ✔       like           VB      ROOT    
+3   to              O               O                 ✔       to             TO      aux     
+4   stay            O               O                 ✔       stay           VB      xcomp   
+5   for             O               O                 ✔       for            IN      prep    
+6   a               B-date_period   O                    ✗    a              DT      det     
+7   fortnight       I-date_period   I-date_period     ✔       fortnight      NN      pobj    
+8   in              O               O                 ✔       in             IN      prep    
+9   the             O               O                 ✔       the            DT      det     
+10  cheapest        O               O                 ✔       cheap          JJS     amod    
+11  room            O               O                 ✔       room           NN      pobj    
+12  you             O               O                 ✔       you            PRP     nsubj   
+13  have            O               O                 ✔       have           VBP     ccomp   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (6, 8): date_period    
+
+predicted spans (incorrectly extracted from BIO tags):
+
+=============================================================================================
+
+Input: I would to book a weekend away for myself and my husband for the 29 May please.
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   I               O               O                 ✔       I              PRP     nsubj   
+1   would           O               O                 ✔       would          MD      ROOT    
+2   to              O               O                 ✔       to             TO      aux     
+3   book            O               O                 ✔       book           VB      xcomp   
+4   a               B-date_period   O                    ✗    a              DT      det     
+5   weekend         I-date_period   B-date_period        ✗    weekend        NN      npadvmod
+6   away            O               O                 ✔       away           RB      advmod  
+7   for             O               O                 ✔       for            IN      prep    
+8   myself          B-adults        O                    ✗    myself         PRP     pobj    
+9   and             I-adults        O                    ✗    and            CC      cc      
+10  my              I-adults        O                    ✗    my             PRP$    poss    
+11  husband         I-adults        I-adults          ✔       husband        NN      conj    
+12  for             O               O                 ✔       for            IN      prep    
+13  the             O               O                 ✔       the            DT      det     
+14  29              B-date_from     B-date_from       ✔       29             CD      nummod  
+15  May             I-date_from     I-date_from       ✔       May            NNP     compound
+16  please          O               O                 ✔       please         UH      intj    
+17  .               O               O                 ✔       .              .       punct   
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (4, 6): date_period    
+  (8, 12): adults         
+✔ (14, 16): date_from      
+
+predicted spans (incorrectly extracted from BIO tags):
+  (5, 6): date_period
+✔ (14, 16): date_from
+
+=============================================================================================
+
+Input: One night for next Friday the 17th
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   One             B-date_period   B-adults             ✗    one            CD      nummod  
+1   night           I-date_period   I-date_period     ✔       night          NN      npadvmod
+2   for             O               O                 ✔       for            IN      prep    
+3   next            O               B-date               ✗    next           JJ      amod    
+4   Friday          B-date_from     B-date_from       ✔       Friday         NNP     pobj    
+5   the             I-date_from     O                    ✗    the            DT      det     
+6   17th            I-date_from     B-date_from          ✗    17th           JJ      ROOT    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (0, 2): date_period    
+  (4, 7): date_from      
+
+predicted spans (incorrectly extracted from BIO tags):
+  (0, 2): adults
+  (3, 4): date
+  (4, 5): date_from
+  (6, 7): date_from
+
+=============================================================================================
+
+Input: Two nights from Friday 29th
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   Two             B-date_period   B-date_period     ✔       two            CD      nummod  
+1   nights          I-date_period   I-date_period     ✔       night          NNS     ROOT    
+2   from            O               O                 ✔       from           IN      prep    
+3   Friday          B-date_from     B-date_from       ✔       Friday         NNP     compound
+4   29th            I-date_from     B-date_from          ✗    29th           NN      pobj    
+
+annotated spans:
+✔ (0, 2): date_period    
+  (3, 5): date_from      
+
+predicted spans:
+✔ (0, 2): date_period
+  (3, 4): date_from
+  (4, 5): date_from
+
+=============================================================================================
+
+Input: two little humans
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   two             B-kids          B-adults             ✗    two            CD      nummod  
+1   little          O               O                 ✔       little         JJ      amod    
+2   humans          O               O                 ✔       human          NNS     ROOT    
+
+annotated spans:
+  (0, 1): kids           
+
+predicted spans:
+  (0, 1): adults
+
+=============================================================================================
+
+Input: my husband and I will be coming with our three sons
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   my              B-adults        O                    ✗    my             PRP$    poss    
+1   husband         I-adults        I-adults          ✔       husband        NN      nsubj   
+2   and             I-adults        O                    ✗    and            CC      cc      
+3   I               I-adults        O                    ✗    I              PRP     conj    
+4   will            O               O                 ✔       will           MD      aux     
+5   be              O               O                 ✔       be             VB      aux     
+6   coming          O               O                 ✔       come           VBG     ROOT    
+7   with            O               O                 ✔       with           IN      prep    
+8   our             O               O                 ✔       our            PRP$    poss    
+9   three           B-kids          B-date_period        ✗    three          CD      nummod  
+10  sons            O               O                 ✔       son            NNS     pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (0, 4): adults         
+  (9, 10): kids           
+
+predicted spans (incorrectly extracted from BIO tags):
+  (9, 10): date_period
+
+=============================================================================================
+
+Input: myself only
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   myself          B-adults        O                    ✗    myself         PRP     ROOT    
+1   only            O               O                 ✔       only           RB      advmod  
+
+annotated spans:
+  (0, 1): adults         
+
+predicted spans:
+
+=============================================================================================
+
+Input: 7th to 21st of the month
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   7th             B-date_from     B-date_from       ✔       7th            JJ      ROOT    
+1   to              O               O                 ✔       to             IN      prep    
+2   21st            B-date_to       I-date               ✗    21st           NN      pobj    
+3   of              I-date_to       O                    ✗    of             IN      prep    
+4   the             I-date_to       O                    ✗    the            DT      det     
+5   month           I-date_to       O                    ✗    month          NN      pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+✔ (0, 1): date_from      
+  (2, 6): date_to        
+
+predicted spans (incorrectly extracted from BIO tags):
+✔ (0, 1): date_from
+
+=============================================================================================
+
+Input: until the 2nd
+
+Analysis:                                                     
+Additional annotations:
+idx word            BIO annotation  BIO prediction  correct?  lemma_         tag_    dep_    
+------------------------------------------------------------  -------------------------------
+0   until           O               O                 ✔       until          IN      ROOT    
+1   the             O               O                 ✔       the            DT      det     
+2   2nd             B-date_to       I-date               ✗    2nd            JJ      pobj    
+
+!!! Predicted BIO tag sequence is malformed. Some predicted spans were not extracted correctly !!!
+
+annotated spans:
+  (2, 3): date_to        
+
+predicted spans (incorrectly extracted from BIO tags):
+
+=============================================================================================
+
+
+Classification report for BIO tags:
+
+               precision    recall  f1-score   support
+
+     B-adults       0.21      0.33      0.26         9
+       B-date       0.43      0.38      0.40         8
+  B-date_from       0.36      0.40      0.38        20
+B-date_period       0.12      0.22      0.15         9
+    B-date_to       0.15      0.18      0.17        11
+       B-kids       0.00      0.00      0.00         6
+     B-number       0.00      0.00      0.00         3
+     B-people       0.25      0.25      0.25         4
+B-person_name       0.00      0.00      0.00         4
+      B-rooms       0.00      0.00      0.00         9
+       B-time       0.33      0.17      0.22         6
+  B-time_from       0.00      0.00      0.00         1
+B-time_period       0.00      0.00      0.00         3
+     I-adults       1.00      0.25      0.40         8
+       I-date       0.00      0.00      0.00         5
+  I-date_from       0.33      0.07      0.11        15
+I-date_period       0.60      0.67      0.63         9
+    I-date_to       0.00      0.00      0.00         5
+       I-kids       0.00      0.00      0.00         0
+     I-number       0.00      0.00      0.00         0
+     I-people       0.00      0.00      0.00         0
+I-person_name       0.00      0.00      0.00         2
+      I-rooms       0.75      0.25      0.38        12
+       I-time       0.44      0.36      0.40        11
+  I-time_from       0.00      0.00      0.00         3
+I-time_period       1.00      0.33      0.50         3
+
+    micro avg       0.31      0.22      0.26       166
+    macro avg       0.23      0.15      0.16       166
+ weighted avg       0.32      0.22      0.24       166
+
+!!! Classification report for slots is unavailable becausesome predicted BIO tag sequences were malformed !!!

@@ -1,0 +1,364 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,hyperref,url}
+\usepackage[margin=25mm]{geometry}
+\renewcommand*\ttdefault{txtt} % 20% tighter than courier
+\setlength{\parskip}{2mm}
+\setlength{\parindent}{0mm}
+
+\usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{makecell}
+\newcommand{\condon}{\,|\,}
+
+
+\begin{document}
+\begin{center}
+{\Large\bf ANLP Assignment 2 2024}\\ \large Marked anonymously: do not add your name(s) or ID numbers.\\[2mm]
+\end{center}
+
+Use this template file for your solutions. Please start each question on a new page (as we have done here). Do not remove the pagebreaks. Different questions may be marked by different markers so your answers must be self-contained.
+
+\pagebreak
+\section{Logistic regression tagging with word embeddings}
+
+In comparing the two models, we see that all three types of averages (micro-average, macro-average, and weighted average) for all metrics reveal better scores for the Logistic Regression Model, almost doubling the scores from the most frequent tag model. A significant improvement across these three averages indicates that the Logistic Regression Model performs better. Take as an example the weighted average for precision, recall, and F1-score; the most frequent tag model yields the following values: 0.32, 0.22, 0.24, respectively, while the Logistic Regression Model gives 0.53, 0.49, 0.50. 
+
+% The micro-average sums all decisions for all tags into one confusion matrix and then computes the metrics, as opposed to the macro-average, which computes metrics for each class and then averages them in the end; finally, the weighted average acts very similarly to the macro-average but takes a weighted average, giving more weight to more frequent classes.
+% A significant improvement across these three averages indicates to us that the Logistic Regression Model performs better.
+
+\begin{table}
+    \begin{minipage}{.45\linewidth}
+      \centering
+      \scalebox{0.95}{
+      \begin{tabular}{|c|c|c|}
+        \hline
+        \multicolumn{1}{|c|}{\textbf{Words}} & \multicolumn{1}{c|}{\textbf{Truth Set}} & \multicolumn{1}{c|}{\textbf{Predicted Set}} \\
+        \hline
+        bruggeman & B-person\_name & O \\
+        shaida    & B-person\_name & O \\
+        delana    & B-person\_name & O \\
+        jon       & O & O \\
+        jacuzzi       & O & O \\
+        mural     & B-person\_name & O \\
+        \hline
+    \end{tabular}}
+    \subcaption{Most frequent Tag model}
+    \label{tab_name_freq}
+    \end{minipage}%
+    \hspace{0.05\linewidth}
+    \begin{minipage}{.45\linewidth}
+      \centering
+        \scalebox{0.95}{
+      \begin{tabular}{|c|c|c|}
+        \hline
+        \multicolumn{1}{|c|}{\textbf{Words}} & \multicolumn{1}{c|}{\textbf{Truth Set}} & \multicolumn{1}{c|}{\textbf{Predicted Set}} \\
+        \hline
+        bruggeman & B-person\_name & B-date\_to \\
+        shaida    & B-person\_name & B-person\_name \\
+        dalana    & B-person\_name & B-person\_name \\
+        jon       & O              & B-person\_name \\
+        jacuzzi   & O              & B-person\_name \\
+        murad     & B-person\_name & O \\
+        \hline
+    \end{tabular}}
+    \subcaption{Logistic Regression model}
+    \label{tab_name_logreg}
+    \end{minipage} 
+    \caption{Labels and predicted tags for each word for both models}
+    \label{b_name_tag}
+\end{table}
+
+Delving the \texttt{B-person\_name} tag, we provide examples in Table \ref{b_name_tag}. We observe that the frequent tag model performs poorly on words with the \texttt{B-person\_name} tag, assigning the \texttt{O} tag to all of them, as depicted in Table \ref{tab_name_freq}. This reveals one of the models' weaknesses, which we discuss further below. On the other hand, the Logistic Regression Model successfully identifies the correct tag for some tokens in Table \ref{tab_name_logreg}, leading to more accurate recognition of names, even though it occasionally introduces false positives.
+
+
+
+Analyzing the most frequent tag model, we observe that it struggles to assign correct tags to unseen words (words that appear in the validation set but were absent in the training set). This issue arises because the probability of tags given these unseen words is zero, as the word-tag pair does not exist in the training set. As a result, the model defaults to assigning these words the \texttt{O} tag. This behavior is explained by the maximum likelihood estimate (MLE) formula:
+
+\[
+P(t \mid w) = \frac{\text{count}(t, w)}{\text{count}(w)}
+\]
+
+Where $\text{count}(t, w)$ is the number of occurrences in the training data set such that a token $w$ appears with tag $t$. This value is zero for unseen words, regardless of the tag; meaning that $P(t|w)$, the probability of assigning tag $t$ to a word $w$, will also be zero. As a result, the model assigns the \texttt{O} tag to these words.
+
+% Since \(\text{count}(w, t) = 0\) for unseen words, \( P(t \mid w) \) also becomes zero, leading the model to apply the \texttt{O} tag to these words.
+
+
+On the other hand, the logistic regression model makes its predictions based on word embeddings, as opposed to the words themselves. Since $P(t \mid w)$ is now a logistic regression model, we have that $P(t \mid w) \in (0,1)$ which is never zero, avoiding the previous problem.
+
+Additionally, embeddings provide more context for name entity recognition (NER) systems by capturing word meanings and relationships. This allows the model to link new or unseen words to similar ones from the training set, improving its ability to correctly assign tags based on probabilities calculated for each embedding. This approach reduces the number of words being misclassified with the \texttt{O} tag, as seen in Table \ref{tab_name_freq}. Overall, we can see that the Logistic Regression Model performs better than the most frequent tag Model.
+
+% Despite its advantages, the embedding-based model exhibits certain limitations. It encounters difficulties in accurately assigning tags to words when multiple plausible tags exist. 
+% For instance, in Table \ref{no_context}, when the model attempts to assign a tag to the word \texttt{of}, it struggles to disambiguate between tags such as \texttt{I-date}, \texttt{I-date\_from}, and \texttt{I-date\_to} because it lacks context information about the surrounding words. In such cases, the correct tag is often determined by the neighboring words. For example, since the word \texttt{from} preceds \texttt{of}, the correct tag is \texttt{I-date\_from}; however if instead of \texttt{from} we had \texttt{until} then the correct tag would be \texttt{I-date\_to}.
+
+
+% \begin{table}[htb!]
+%     \centering
+%     \caption{Micro-average, Macro-average, and Weighted Average of Precision, Recall, and F1-score for both models}
+%     \label{averages}
+%     \begin{minipage}{0.5\linewidth}
+%         \centering
+%         \scalebox{0.95}{
+%         \begin{tabular}{|c|c|c|c|}
+%             \hline
+%              & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+%             \hline
+%             \textbf{Micro} & 0.31  &  0.22  &   0.26 \\
+%             \textbf{Macro} & 0.23  &   0.15 &  0.16 \\
+%             \textbf{Weighted} & 0.32 & 0.22 &  0.24 \\
+%             \hline
+%         \end{tabular}}
+%         \subcaption{Most Frequent Tag Model}
+%     \end{minipage}%
+%     \hfill
+%     \begin{minipage}{0.5\linewidth}
+%         \centering
+%         \scalebox{0.95}{
+%         \begin{tabular}{|c|c|c|c|}
+%             \hline
+%              & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+%             \hline
+%             \textbf{Micro} & 0.55  &  0.49  &   0.52 \\
+%             \textbf{Macro} & 0.44  &  0.39 &  0.40 \\
+%             \textbf{Weighted} & 0.53 & 0.49 &  0.50 \\
+%             \hline
+%         \end{tabular}}
+%         \subcaption{Logistic Regression Model}
+
+%     \end{minipage}
+% \end{table}
+
+
+
+% \begin{table}[htb!]
+%     \caption{True Positives (TP), False Positives (FP), False Negatives (FN) for \texttt{B-person\_name} tag}
+%     \label{TPFPFN}
+%     \begin{minipage}{.5\linewidth}
+%         \centering
+%         \begin{tabular}{|c|c|c|c|}
+%             \hline
+%             \textbf{Tag} & \textbf{TP} & \textbf{FP} & \textbf{FN} \\
+%             \hline
+%             B-person\_name & 0 & 0 & 5 \\
+%             \hline
+%         \end{tabular}
+%         \subcaption{Most Frequent Tag model}
+%     \end{minipage}
+%     \hspace{0.001\linewidth}
+%     \begin{minipage}{.5\linewidth}
+%         \centering
+%         \begin{tabular}{|c|c|c|c|}
+%             \hline
+%             \textbf{Tag} & \textbf{TP} & \textbf{FP} & \textbf{FN} \\
+%             \hline
+%             B-person\_name & 2 & 2 & 2 \\
+%             \hline
+%         \end{tabular}
+%         \subcaption{Logistic Regression model}
+%     \end{minipage}
+% \end{table}
+
+% \begin{table}[htb!]
+%     \caption{Precision, Recall, and F1-score for \texttt{B-person\_name} tag}
+%     \begin{minipage}{.5\linewidth}
+%         \centering
+%         \scalebox{0.9}{
+%         \begin{tabular}{|c|c|c|c|}
+%             \hline
+%             \textbf{Tag} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} \\
+%             \hline
+%             B-person\_name & 0 & 0 & 0 \\
+%             \hline
+%         \end{tabular}}
+%         \subcaption{Most Frequent Tag model}
+%     \end{minipage}
+%     \begin{minipage}{.5\linewidth}
+%         \centering
+%         \scalebox{0.9}{
+%         \begin{tabular}{|c|c|c|c|}
+%             \hline
+%             \textbf{Tag} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} \\
+%             \hline
+%             B-person\_name & 0.5 & 0.5 & 0.5 \\
+%             \hline
+%         \end{tabular}}
+%         \subcaption{Logistic Regression model}
+%     \end{minipage}
+
+% \end{table}
+
+% \begin{table}[h!]
+%     \centering
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         \textbf{Word} & \texttt{Labels} &\texttt{Predicted} \\
+%         \hline
+%         5       & B-date\_period & B-date\_period\\
+%         nights  & I-date\_period & I-date\_period\\
+%         from    & O & O\\
+%         15th    & B-date\_from & B-date\_from\\
+%         of      & I-date\_from & I-date\_to\\
+%         October & B-date\_from & B-date\_from\\
+%         ?       & O & O\\
+%         \hline
+%     \end{tabular}
+    
+%     \caption{BIO Predictions for Logistic Regression model}
+%     \label{no_context}
+% \end{table}
+
+
+\clearpage
+
+\pagebreak
+\section{BIO tagging for slot labeling}
+
+The \texttt{predict\_bio\_tags()} function generates all possible tags for each token based on word embeddings, sorted by their probability. It then retrieves the most probable tag and checks if it meets the BIO tagging constraint. Specifically, if the tag starts with the prefix \texttt{I-}, the function compares its type with the type of the previous tag. If they don’t match, the function moves to the next most probable tag. Once a tag satisfies the constraint, it is then assigned to the token. In other words, since BIO tags begin with \texttt{I-} or \texttt{B-}, we are ensuring that every \texttt{I-} follows a \texttt{B-} or \texttt{I-} tag of the same type (BIO constraint).
+This procedure is repeated for each token in the input sentence.
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Word} & \texttt{predict\_independent\_tags()} &\texttt{predict\_bio\_tags()} \\
+        \hline
+        5       & B-date\_period & B-date\_period\\
+        nights  & I-date\_period & I-date\_period\\
+        from    & O & O\\
+        15th    & B-date\_from & B-date\_from\\
+        of      & I-date\_to & I-date\_from\\
+        October & B-date\_from & B-date\_from\\
+        ?       & O & O\\
+        \hline
+    \end{tabular}
+    
+    \caption{BIO Predictions using \texttt{predict\_independent\_tags()} and \texttt{predict\_bio\_tags()}}
+    \label{fig3}
+\end{table}
+
+Observing Table \ref{fig3}, the model using
+\texttt{predict\_independent\_tags()}
+assigns the tag \texttt{I-date\_to} to the token \texttt{of}. However, \texttt{I-date\_to} does not align with the BIO constraint (the tag type \texttt{date\_to} does not match with the tag type \texttt{date\_from} of token \texttt{15th}), so
+\texttt{predict\_bio\_tags()}
+replaces \texttt{I-date\_to} with \texttt{I-date\_from}, which is the most probable tag that satisfies the constraint.
+
+As a suggested approach, the Viterbi algorithm is well-suited because it uses dynamic programming method to find the most likely sequence of tags in a Hidden Markov Model (HMM) given an observation sequence. In a HMM, the probability of each tag depends only on the previous tag (Markov Assumption), allowing us to enforce BIO constraints by defining valid and invalid transitions. Specifically, if the current tag (state) begins with \texttt{I-}, the previous tag (state) must begin with \texttt{B-} or \texttt{I-} of the same type; otherwise, the transition probability is set to zero. Additionally, emission probabilities are given by $b_{s}(o_i) = \frac{P(t|o_i)}{P(t_i)}$, where $o_i$ is the $i^{th}$ token of the sentence, and $t$ denotes the tag of state $s$; $P(t|o_i)$ is given by our model and $P(t_i)$ is computed through MLE.
+At each step, the algorithm uses both transition and emission probabilities to compute the most likely path with a correct BIO tagging format by skipping invalid transitions.
+
+Before applying the Viterbi Algorithm, the transition probabilities need to be computed. In detail, the probability of valid transitions are computed through Maximum Likelihood estimations while invalid transitions are set to 0. The computational complexity is $\mathcal{O}(S^2 \times T)$, where $S$ is the number of tags and $T$ is the sentence length. The complexity comes from calculating each possible tag transition (from each previous tag to each current tag) at each position in the sentence. In contrast, the complexity of the provided algorithm is $\mathcal{O}(S \times T)$, in the worst scenario, as it checks all the possible tags for each token. However, the typical complexity is $\mathcal{O}(T)$, since the most probable tag often complies with the BIO taggings rule.
+
+Overall, the provided algorithm is more efficient and requires less memory, making it suitable for longer sequences. Unlike Viterbi algorithm, it doesn’t store backpointers, which Viterbi uses to trace back from the last token to determine the optimal tag sequence
+
+Finally, the Viterbi algorithm provides more accurate results by considering dependencies between tags across the sequence. In Table \ref{fig3}, Viberti would likely help the model recognize \texttt{October} as part of the span \texttt{15th of October} and correctly assign it the tag \texttt{I-date\_from}.
+
+
+\pagebreak
+\section{Error Analysis and Feature Engineering}
+
+We identified that the current model frequently misclassifies the span label \texttt{date\_from}. We examined this issue closely, presenting specific examples along with reasoning as to why these errors might occur and suggesting potential ways to address them.
+
+Considering this, the model sometimes fails to recognize tokens, which should be assigned to date-related tag labels, such as 
+\texttt{date}, \texttt{date\_from}, and \texttt{date\_to}. In the following example \texttt{"A double room for tomorrow for 8 days"}, the model does not tag \texttt{tomorrow} as date-related; instead, it incorrectly marks it as \texttt{O} (outside tag), as shown in Table \ref{tab_entity} below. This issue arises because the embeddings may not provide enough information to identify the type of entity each word represents, as indicated by the \texttt{Entity Type} column in Table \ref{tab_entity}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Word} & \makecell{\textbf{Entity} \\ \textbf{Type}} & \textbf{BIO Annotations} & \makecell{\textbf{Original} \\ \textbf{BIO Predictions}} & \makecell{\textbf{Updated} \\ \textbf{BIO Predictions}}\\
+        \hline
+        a & - & B-rooms & B-rooms & B-rooms \\
+
+        double & - & I-rooms & I-rooms & I-rooms \\
+
+        room & - & I-rooms & I-rooms & I-rooms \\
+
+        for & - & O & O & O \\
+
+        tomorrow & DATE & B-date\_from & O & B-date \\
+
+        for & - & O & O & O\\
+
+        8 & DATE & B-date\_period & B-date\_period & B-date\_period\\
+
+        days & DATE & I-date\_period & I-date\_period & I-date\_period\\
+        \hline
+    \end{tabular}
+    \caption{Comparision between BIO Predictions of the Original and Updated Logistic Regression Model incorporating the linguistic feature entity type of each word}
+    \label{tab_entity}
+\end{table}
+
+To reduce the problem, we decided to add the linguistic feature of \texttt{ent\_type\_} to the embeddings. We believe this approach will be effective because \texttt{token.ent\_type\_} frequently recognizes common entity types such as dates. This provides the model with clearer indications that certain words, such as \texttt{tomorrow} should be assigned with a date-related tag.
+
+The results of the updated model in Table \ref{tab_entity} show that \texttt{tomorrow} is now assigned to a date-related tag, \texttt{B-date}.
+
+However, the model still struggles to accurately distinguish between similar span tags, such as \texttt{date}, \texttt{date\_from}, and \texttt{date\_to}. This challenge occurs because each tag has a specific contextual meaning that often depends on surrounding words. For instance, the tag \texttt{date\_from} usually relies on words such as \texttt{from} or \texttt{starting}, while \texttt{date\_to} might depend on words \texttt{to} or \texttt{until}.
+
+\begin{table}[h!]     \centering     \begin{tabular}{|c|c|c|c|c|}         \hline         
+\textbf{Word} & \textbf{Token Head} & \textbf{BIO Annotation} & \makecell{\textbf{Original} \\ \textbf{BIO Predictions}} & \makecell{\textbf{Updated} \\ \textbf{BIO Predictions}} \\
+\hline  
+Two & nights & B-date\_period & B-date\_period & B-date\_period\\
+       
+nights & nights & I-date\_period & I-date\_period & I-date\_period\\
+      
+from & nights & O & O & O\\ 
+       
+Friday & 29th & B-date\_from & B-date\_from & B-date\_from\\
+       
+29th & from & I-date\_from & B-date\_to & I-date\_from\\
+\hline     \end{tabular}     \caption{Token's Head, BIO Annotations, and BIO Predictions of the Original and Updated version of the Logistic Regression Model.} 
+\label{tab_head}
+\end{table}
+
+Analyzing the sentence \texttt{"Two nights from Friday 29th"}, as shown in Table \ref{tab_head}, the token \texttt{29th} should be labeled as \texttt{date\_from}, based on the context provided by the word \texttt{from}. But the original model incorrectly assigns the tag type \texttt{date\_to} to \texttt{29th}, interpreting it as the end of the date range rather than part of a starting date. This misclassification occurs because the current embeddings do not capture the relationship between \texttt{29th} and its neighboring word \texttt{from}.
+The existing embeddings represent each token individually and may lack information about this kind of contextual links between tokens.
+
+To improve the model's performance and address this tagging issue, we further added an additional linguistic feature, \texttt{token.head}, to enrich even more the embeddings' information. By concatenating \texttt{token.head.vector} to the previous modified embeddings, this feature provides more context about how each word in a sentence connects to others, especially highlighting which words act as \texttt{heads} that influence the meaning of neighbouring words.
+
+In Table \ref{tab_head}, \texttt{token head} offers meaningful information because dates are often surrounded by words such as \texttt{from}, \texttt{to}, or \texttt{until} that indicate a time range. In the following sentence \texttt{"Two nights from Friday 29th"}, the token head feature leads the model to recognize that \texttt{29th} is linked to the token \texttt{from}, as illustrated in Figure \ref{fig:heads}. With this addition, the model can correctly assign the token \texttt{29th} to the tag type \texttt{date\_from} rather than \texttt{date\_to}, as reflected in the updated predictions in Table \ref{tab_head}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{dependency.png}
+    \caption{Visualization of dependency parse, showing the head relationships for each token.}
+    \label{fig:heads}
+\end{figure}
+
+In summary, the updated Logistic Regression Model, enhanced with embeddings that incorporate additional linguistic features, demonstrates an improvement over the original. The average metrics across all slot labels show higher values, as shown in Table \ref{tab_overall_avg}, indicating the benefits of including features, such as head dependencies and entity types. Remarkably, we noticed that the three metrics (Precision, Recall, and F1-score) of the slot label \texttt{date\_from} are significantly better increasing from 0.44, 0.55, 0.49 in the original model to 0.62, 0.65, 0.63 of the updated model, respectively.
+
+\begin{table}[h!]     \centering     \begin{tabular}{|c|c|c|c|c|c|c|}         \hline         & \multicolumn{3}{|c|}{\textbf{Original Model}} & \multicolumn{3}{|c|}{\textbf{Updated Model}} \\         \hline         \textbf{Metric} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} \\         \hline         Micro Avg & 0.47 & 0.47 & 0.47 & 0.56 & 0.54 & 0.55 \\                  Macro Avg & 0.40 & 0.41 & 0.40 & 0.45 & 0.45 & 0.44 \\                 Weighted Avg & 0.46 & 0.47 & 0.46 & 0.55 & 0.54 & 0.53 \\         \hline     \end{tabular}     \caption{Comparison between the averages of Precision, Recall, and F1 Score for Original and Updated Models}
+\label{tab_overall_avg}
+\end{table}
+
+Going further, we observe that the modifications made to our model yield promising results across most slot labels. For example, in the sentence \texttt{From the 16th to the 30th, a single room for 2 adults and 1 child}, the updated model correctly assigns the slot label \texttt{rooms} to the tokens \texttt{a}, \texttt{single}, and \texttt{room}, identifying the word \texttt{room} as their syntactic head. In contrast, the original model incorrectly labeled these tokens as \texttt{O}. By incorporating head dependency, the model is better equipped to recognize when tokens belong to the same span, reducing misslabeling errors. This improvement makes the model to perform better for similar cases, such as \texttt{2 adults} or \texttt{8 people}, labeling those correctly through their syntactic relationship (the head of \texttt{2} is \texttt{adults} and \texttt{people} is the head of \texttt{8}).
+\pagebreak
+\section{Final Test Reporting and Reflection}
+
+Starting with the comparison of the original Logistic Regression model on both the validation and test sets, we observed from the classification report that the model performs better on the validation set, as shown by the average metrics, which provide an overall assessment of model performance. For example, the micro averages for Precision, Recall, and F1-score are 0.37, 0.39, and 0.38 on the test set, compared to 0.47 for all metrics on the validation set. This pattern is similar in our model, with micro average metrics of 0.43, 0.44, and 0.43 for precision, recall, and F1-score on the test set, while the validation set scores were higher at 0.56, 0.54, and 0.55.
+
+Since we didn’t conduct hyperparameter optimization on the original Logistic Regression Model using the validation set, we cannot explain with certainty the performance discrepancy between the validation and test sets. Given that the training, validation, and test sets were randomly sampled from the same source, we would expect similar performance between validation and test sets. However, if the validation set happens to be more closely aligned with the training data, it may yield higher performance scores. On the other hand, the test set could contain unique or less frequent patterns, leading to lower performance metrics.
+
+Unlike the original Logistic Regression model, our updated model was refined based on results and examples from the validation set with additional linguistic features to help it recognize patterns in the validation data and assign correct tags to tokens. However, because these patterns are less frequent in the test set, the model’s performance is lower on this set than on the validation set.
+
+To be specific, our model is able to recognize the pattern "\texttt{from [DATE]}". For example, in the phrase \texttt{from 15th of October}, the model correctly assigns the tag sequence \texttt{B-date\_from, I-date\_from, I-date\_from} to the tokens \texttt{15th}, \texttt{of}, and \texttt{October}, respectively. However, this pattern is less common in the test set, appearing only twice compared to seven times in the validation set, even though the overall support for \texttt{date\_from} tags is similar. This difference in pattern frequency leads the model to perform worse on the test set.
+
+Overall, the modified model with extra linguistic features performs better than the original logistic regression model across the classification metrics on both the validation and test sets. This is mainly because the added features give the token embeddings richer context from surrounding words, helping the model make more accurate tag predictions and reducing misclassifications. As a result, the modified model shows improved performance on both the validation and test sets compared to the logistic regression model.
+\iffalse
+
+\begin{itemize}
+    \item i slept in and will have to check out later than 6 -> model optimize for 6 hours
+    \item change hotel booking, my name is edens -> spacy doesnt recognize edens as PER, and model relies on that
+    \item Have you got any availability between 17th May to 21st May, we are three for a four night stay -> model optimize for word "for", doesnt do well with between
+    \item She's arriving on Wednesday and will be staying until Sunday next week. -> doesnt seem to work with until as well
+    \item model was optimize to work well with examples "from date/time" "to date/time", however in the test data this pattern occurs much less time (from went from 7 to 2 examples)
+\end{itemize}
+
+
+\fi
+ 
+
+
+\end{document}
