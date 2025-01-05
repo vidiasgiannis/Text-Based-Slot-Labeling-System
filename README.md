@@ -10,8 +10,9 @@ This project implements and improves a slot labeling model, a crucial component 
     |-- validation_data.json # Validation data
     |-- test_data.json       # Test data
     |-- ontology.json        # Ontology describing intents and slots
-|-- label_slots.py           # Main executable script
-|-- utils.py                 # Helper functions for preprocessing and evaluation
+|-- src/
+    |-- label_slots.py       # Main executable script
+    |-- utils.py             # Helper functions for preprocessing and evaluation
 |-- README.md                # Documentation
 ```
 
