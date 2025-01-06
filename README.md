@@ -1,4 +1,4 @@
-# README: Slot Labeling Project
+# README: Slot Labeling 
 
 ## Overview
 This project implements and improves a slot labeling model, a crucial component of task-oriented dialogue systems such as virtual assistants (e.g., Siri, Alexa). The primary focus is to enhance the accuracy of slot labeling by experimenting with different approaches, including logistic regression and BIO tagging.
